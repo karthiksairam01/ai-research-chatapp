@@ -15,7 +15,7 @@ This application was built to showcase an end-to-end MLOps workflow, from data p
 
 -   **Frontend:** Streamlit
 -   **LLM & RAG Framework:** LangChain
--   **Language Model:** Google Gemini Pro
+-   **Language Model:** Google Gemini Flash 2.5
 -   **Vector Store:** ChromaDB
 -   **Embeddings:** Hugging Face Sentence Transformers (`all-MiniLM-L6-v2`)
 -   **PDF Processing:** PyPDF
