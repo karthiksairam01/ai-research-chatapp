@@ -1,6 +1,6 @@
 # Chat with My Research
 
-This project is a web application that allows users to have a conversation with my research papers. It uses a Retrieval-Augmented Generation (RAG) pipeline to provide accurate, context-aware answers based solely on the content of the document, effectively preventing the language model from hallucinating.
+This project is a web application that allows users to have a conversation with my research papers. It uses a Retrieval-Augmented Generation (RAG) pipeline to provide accurate, context-aware answers based solely on the content of the document, effectively preventing the language model from hallucinating. The data folder already has two of my research papers.
 
 ## Features
 
@@ -26,26 +26,9 @@ Follow these steps to run the application on your local machine.
 
 ### 1. Clone the Repository
 
-```bash
-git clone [https://github.com/your-username/ai-research-chatapp.git](https://github.com/your-username/ai-research-chatapp.git)
-cd ai-research-chatapp
-```
-
 ### 2. Create and Activate a Virtual Environment
 
-It's highly recommended to use a virtual environment to manage dependencies.
-
-```bash
-# Create the environment
-python3 -m venv venv
-
-# Activate the environment
-source venv/bin/activate
-```
-
 ### 3. Install Dependencies
-
-Install all the required Python libraries using the `requirements.txt` file.
 
 ```bash
 pip install -r requirements.txt
@@ -65,13 +48,9 @@ The application requires a Google AI API key to use the Gemini model.
 
 ### 5. Run the Application
 
-Once the setup is complete, run the Streamlit application from your terminal.
-
 ```bash
 streamlit run app.py
 ```
-
-Your web browser should automatically open a new tab with the running application.
 
 ## How to Use
 
