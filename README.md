@@ -1,8 +1,6 @@
 # Chat with My Research 📄🤖
 
-This project is a web application that allows users to have a conversation with my NLP research paper, "Paraphrase Detection in a Low Resourced Language: Kannada." It uses a Retrieval-Augmented Generation (RAG) pipeline to provide accurate, context-aware answers based solely on the content of the document, effectively preventing the language model from hallucinating.
-
-This application was built to showcase an end-to-end MLOps workflow, from data processing and model integration to building an interactive user interface.
+This project is a web application that allows users to have a conversation with my research papers. It uses a Retrieval-Augmented Generation (RAG) pipeline to provide accurate, context-aware answers based solely on the content of the document, effectively preventing the language model from hallucinating.
 
 ## Features
 
