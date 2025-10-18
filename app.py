@@ -8,26 +8,19 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
-# --- Caching Functions to Improve Performance ---
-# This decorator caches the result of the function, so we don't reload the PDF
-# and re-create the vector store every time the app reruns.
 
 @st.cache_resource
 def load_and_process_pdf():
     """Loads a PDF, splits it into chunks, and creates a vector store."""
-    # Load the document
-    loader = PyPDFLoader("data/Paraphrase_generation.pdf") # <-- Make sure your PDF is in a 'data' folder
+    loader = PyPDFLoader("data/Paraphrase_generation.pdf") 
     documents = loader.load()
 
-    # Split the document into chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=300)
     docs = text_splitter.split_documents(documents)
 
-    # Initialize the embedding model
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
 
-    # Create the vector store
     vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings)
     return vectorstore.as_retriever(search_kwargs={"k": 7})
 
@@ -36,7 +29,6 @@ def get_rag_chain():
     """Creates the RAG chain using a cached LLM and prompt."""
     llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=st.secrets["GOOGLE_API_KEY"])
 
-    # Change the prompt to encourage synthesis
     prompt = ChatPromptTemplate.from_template("""
     Synthesize a concise answer to the following question based ONLY on the provided context.
     Combine information from the different parts of the context to create a coherent summary.
@@ -71,19 +63,14 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Handle new user input
 if prompt := st.chat_input("Ask a question about the paper..."):
-    # Add user message to session state
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Generate and display model response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = rag_chain.invoke({"input": prompt})
             st.markdown(response["answer"])
-            # Add model response to session state
             st.session_state.messages.append({"role": "assistant", "content": response["answer"]})
